@@ -1,0 +1,15 @@
+default: &default
+  RAPID_API_BASE_URL: 'https://google-translate1.p.rapidapi.com/language/translate/v2'
+  X-RapidAPI-Host: 'google-translate1.p.rapidapi.com'
+  X-RapidAPI-Key: 'f92c084acdmsh0c7022427008653p1f0362jsnba494ec57e2e'
+  Accept-Encoding: 'application/gzip'
+  Content-Type: 'application/x-www-form-urlencoded'
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
