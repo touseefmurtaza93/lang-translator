@@ -27,21 +27,20 @@ module RapidApi
     end
 
     def parameters(query)
-      {
-        'source' => source,
+      { 'source' => source,
         'q' => query,
-        'target' => target
-      }
+        'target' => target }
     end
 
     def translate(query)
       return translate_array(query) if query.is_a?(Array)
 
       request = translation_request(query)
-      begin
+      if request.body['data'].present?
         request.body['data']['translations'].first['translatedText']
-      rescue
-        request.body['message'].truncate(100)
+      else
+        nil
+        # request.body['message'].truncate(100)
       end
     end
 
