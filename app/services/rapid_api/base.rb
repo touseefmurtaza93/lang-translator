@@ -7,7 +7,7 @@ module RapidApi
   class Base
     attr_accessor :source, :target, :query
 
-    def initialize(source, target)
+    def initialize(source = 'en', target = LANGUAGES)
       @source = source
       @target = target
     end
@@ -40,7 +40,6 @@ module RapidApi
         request.body['data']['translations'].first['translatedText']
       else
         nil
-        # request.body['message'].truncate(100)
       end
     end
 
@@ -48,6 +47,17 @@ module RapidApi
       result = []
       arr.each do |elem|
         result << translate(elem)
+      end
+      result
+    end
+
+    def translate_multiple_languages(query)
+      result = []
+      target.each do |target_lang|
+        translated_string = {}
+        @target = target_lang
+        translated_string[@target.to_s] = translate(query).to_s
+        result << translated_string
       end
       result
     end
